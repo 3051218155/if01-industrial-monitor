@@ -75,7 +75,7 @@ python deploy/deploy_ps_to_board.py
 python deploy/deploy_npu_runtime.py
 ```
 
-密码由脚本交互输入，也可以放在本机环境变量 `FPGA_BOARD_PASSWORD` 中，不要提交到 Git。
+脚本运行时会提示输入板端密码；也可以在运行前设置本机环境变量 `FPGA_BOARD_PASSWORD`。密码只保存在本机，不写入仓库。
 
 ## 工程说明
 
