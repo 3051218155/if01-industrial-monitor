@@ -75,13 +75,11 @@ python deploy/deploy_ps_to_board.py
 python deploy/deploy_npu_runtime.py
 ```
 
-脚本运行时会提示输入板端密码；也可以在运行前设置本机环境变量 `FPGA_BOARD_PASSWORD`。密码只保存在本机，不写入仓库。
+脚本运行时会提示输入板端密码；也可以在运行前设置本机环境变量 `FPGA_BOARD_PASSWORD`。
 
 ## 工程说明
 
 - FPGA 顶层模块为 `fpga_if01_top`，AXI-Lite 基地址为 `0x80000000`。
 - 板端网关默认监听 TCP `9000`，PC 端接口默认监听 HTTP `8760`。
 - 模型和输入样例位于 `ai/model`，模型指标保存在同目录的 `metrics.json`。
-- 串口日志、构建目录、密钥、本地 IP 配置和厂商工具链不进入仓库。
-
 寄存器与总线说明见 [docs/interfaces.md](docs/interfaces.md)，系统组成见 [docs/architecture.md](docs/architecture.md)。
