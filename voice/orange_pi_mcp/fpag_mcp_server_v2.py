@@ -5,7 +5,7 @@
     pip install -r requirements.txt
     python3 fpag_mcp_server_v2.py
 
-约束（见 docs/AI交接 §13）：
+接口限制：
 - 只能查询/选择设备、控制 1 号电机、刷新分析、报告、串口；
 - 不允许远程注入故障或修改 3D 诊断结果（`/api/show` 已禁用）。
 """

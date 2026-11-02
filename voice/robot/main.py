@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""便携语音交互（大厂式状态机）
+"""香橙派语音控制主程序
 
 WAIT_WAKE  静默听唤醒词（小橙/小陈…）
 ACK        短应答「在」
@@ -11,7 +11,7 @@ SPEAK      播报结果
 常用参数：
   python main.py                        # 正常语音模式
   python main.py --gateway 192.168.1.100   # 临时换网关，不改配置文件
-  python main.py --keyboard             # 键盘模式（答辩兜底 / 无麦克风调试）
+  python main.py --keyboard             # 键盘模式（无麦克风调试）
   python main.py --no-llm               # 只用规则解析，不调大模型
 """
 from __future__ import annotations
@@ -336,7 +336,7 @@ def main() -> None:
 
         return answer, data, quit_app
 
-    print("=== 大厂式语音状态机（连续聆听）===")
+    print("=== 语音状态机（连续聆听）===")
     print("WAIT_WAKE → ACK → LISTEN_CMD → PROCESS → SPEAK → WAIT_WAKE")
     print(f"网关：{cfg['gateway']['host']}:{cfg['gateway']['port']}   大屏：{'开' if pc_enabled else '关'}")
     if keyboard_mode:
@@ -356,7 +356,7 @@ def main() -> None:
     try:
         while True:
             if keyboard_mode:
-                # ---------- 键盘输入（答辩兜底：绕过麦克风/网络语音）----------
+                # ---------- 键盘输入（无麦克风时直接输入指令）----------
                 try:
                     text = input("你> ").strip()
                 except (EOFError, KeyboardInterrupt):

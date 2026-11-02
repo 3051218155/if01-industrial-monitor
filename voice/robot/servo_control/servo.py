@@ -1,4 +1,4 @@
-"""舵机控制占位 —— 对应文档 §4.4.4。接线后再接 PWM。"""
+"""舵机控制接口，默认关闭。"""
 from __future__ import annotations
 
 

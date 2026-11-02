@@ -34,7 +34,7 @@ pip install -r orange_pi_mcp/requirements.txt
 - `pc_display.host`：PC 监视程序地址
 - `asr.device`、`tts.device`：录音和播放设备
 
-仓库不包含密钥，部署时需要在本机填写。
+部署前请在 `robot/config.yaml` 中填写对应服务的密钥。
 
 ## 启动
 

@@ -224,7 +224,7 @@ def check_display(cfg: dict) -> None:
     if imgs:
         ok(f"拓展屏素材 {len(imgs)} 张：{', '.join(p.name for p in imgs[:4])}")
     else:
-        warn(f"素材目录为空（{assets}）：拓展屏只用色块占位")
+        warn(f"素材目录为空（{assets}）：拓展屏将显示色块提示")
     if d.get("fullscreen"):
         print("       提示：接第二块屏时设 SDL_VIDEO_FULLSCREEN_DISPLAY=1")
 

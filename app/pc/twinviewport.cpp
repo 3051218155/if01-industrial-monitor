@@ -54,7 +54,7 @@ void TwinViewportWidget::paintEvent(QPaintEvent *event)
         p.drawLine(center.x() - spread, y, center.x() + spread, y);
     }
 
-    // 中心占位圆环（模型挂载点）
+    // 中心圆环与模型挂载区域
     p.setPen(QPen(QColor(0x50, 0x8c, 0xff, 160), 2));
     p.setBrush(QColor(0x12, 0x18, 0x26, 200));
     p.drawEllipse(center, 88, 88);

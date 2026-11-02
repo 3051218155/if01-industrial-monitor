@@ -2,7 +2,7 @@
 
 #include <QWidget>
 
-// 右侧 3D 视口占位：后续可替换为 OpenGL / 导入模型
+// 右侧双视图组件：显示故障部位与设备运行状态
 class TwinViewportWidget : public QWidget
 {
     Q_OBJECT

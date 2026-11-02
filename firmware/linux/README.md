@@ -21,7 +21,7 @@ make
 
 ## 运行
 
-板端建议使用仓库中的 systemd 文件：
+板端可使用以下 systemd 配置：
 
 ```bash
 sudo cp deploy/fpga-modbus-slave.service /etc/systemd/system/

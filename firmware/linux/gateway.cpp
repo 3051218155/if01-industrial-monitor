@@ -215,15 +215,15 @@ bool modbusRead03(uint8_t slave, uint16_t start, uint16_t count, uint16_t *out) 
 // ---- 板端"多测点比较"定位算法 ----
 struct BusResult {
     bool ok = false;
-    bool has_vib = false;     // 是否从 Modbus 读到了模拟振动 RMS/峰值
+    bool has_vib = false;     // 是否从 Modbus 读到了振动 RMS/峰值
     int site_code = 0;        // 0 无, 1 轴承, 2 不平衡, 3 松动, 4 联轴器, 5 机壳
     int site_max = 0;         // 最大测点值（×100）
     int over_count = 0;       // 超阈值测点数
     int point[5] = {0, 0, 0, 0, 0};
     int temp_x10 = 0;         // 从站上报温度 ×10
     int current_x100 = 0;     // 从站上报电流 ×100
-    int rms_x100 = 0;         // 模拟振动 RMS，m/s² ×100
-    int peak_x100 = 0;        // 模拟振动峰值，m/s² ×100
+    int rms_x100 = 0;         // 振动 RMS，m/s² ×100
+    int peak_x100 = 0;        // 振动峰值，m/s² ×100
     int alert_level = -1;     // 从站显式上报等级 0/1/2，-1 表示未提供
     bool has_env = false;     // 温度/电流寄存器是否存在
 };
@@ -536,7 +536,7 @@ std::string snapJson(int device_id) {
     uint32_t who = 0;
     int level = busLevelOf(bus);
 
-    // 当前只有 1 号机接了真实 MPU。2..6 号完全使用 Modbus 模拟值。
+    // 1 号机使用本地 MPU，2..6 号使用各自 Modbus 通道的数据。
     const bool localMpu = (device_id == 1);
     const uint64_t nowTs = nowMs();
     if (localMpu) {
@@ -600,7 +600,7 @@ std::string snapJson(int device_id) {
         if (peak_ms2 <= 0.0)
             peak_ms2 = rms_ms2 * 1.5;
     } else if (bus.ok && bus.site_max > 0) {
-        // 兼容只有 5 测点寄存器的旧从站：最大测点作为模拟 RMS。
+        // 兼容只有 5 测点寄存器的旧从站：取最大测点作为 RMS。
         rms_ms2 = bus.site_max / 100.0;
         peak_ms2 = rms_ms2 * 1.5;
     }

@@ -18,7 +18,7 @@ pc_display:
 llm:
   enabled: true
   provider: "openai_compatible"   # DeepSeek 官方，OpenAI 兼容
-  api_key: ""                     # TODO: 填自己的 Key
+  api_key: ""                     # 填写在线意图解析服务 Key
   base_url: "https://api.deepseek.com/v1"
   model: "deepseek-chat"
   timeout_sec: 40
@@ -26,8 +26,8 @@ llm:
 
 baidu:
   app_id: 0                       # 控制台 AppID（整数）；实时流式 ASR 必填
-  api_key: ""                     # TODO: 百度语音 API Key
-  secret_key: ""                  # TODO: 百度语音 Secret Key
+  api_key: ""                     # 百度语音 API Key
+  secret_key: ""                  # 百度语音 Secret Key
 
 asr:
   provider: "baidu"

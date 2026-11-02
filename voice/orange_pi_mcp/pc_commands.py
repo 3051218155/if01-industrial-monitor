@@ -1,6 +1,6 @@
-"""PC Qt 大屏统一 HTTP 接口（:8760）—— 语音规则解析与执行。
+"""PC Qt 大屏统一 HTTP 接口（:8760）与语音规则执行。
 
-接口定义见 `docs/AI交接_香橙派语音机器人.md` §12：
+接口：
   GET  /api/state    当前串口、设备、六台设备状态、RMS/阈值/告警
   GET  /api/report   测试报告（markdown）
   POST /api/command  统一命令（select_device / start_motor / ...）

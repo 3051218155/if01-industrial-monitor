@@ -15,7 +15,7 @@ SYSTEM_PROMPT = """你是工业运维机器人的语音意图解析器。
 - action: query | show | ping | ignore | wake_only
 - device_id: 1~6 或 null（用户没说几号机就填 null，程序会自动取电脑大屏当前选中的设备）
 - fault: bearing | imbalance | looseness | coupling | none | null
-- reply: 简短中文占位口播（ignore 为空；query/show 可先写「好的」）
+- reply: 简短中文应答（ignore 为空；query/show 可先写「好的」）
 
 核心原则（极重要）：
 A) 只要语义上像在查设备、看大屏、切故障、检查连通 → 必须给出 query/show/ping，宁肯猜对也不要 ignore

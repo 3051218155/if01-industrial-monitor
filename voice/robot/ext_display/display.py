@@ -25,7 +25,7 @@ class ExtDisplay:
         self._pygame = pygame
 
     def show_status(self, device_id: int, status: str, fault_location: str = "") -> None:
-        """优先显示图片；没有素材则用色块+文字占位。"""
+        """优先显示图片；没有素材时显示色块和文字提示。"""
         self._ensure_pygame()
         assert self._pygame and self._screen
 
