@@ -8,7 +8,6 @@ Node {
     property int rotorPwm: 0
     property int rotorDirection: 0
 
-    // Resources
     PrincipledMaterial {
         id: belt_rubber_material
         objectName: "belt_rubber"
@@ -46,7 +45,6 @@ Node {
         alphaMode: PrincipledMaterial.Opaque
     }
 
-    // Nodes:
     Node {
         id: root
         objectName: "ROOT"
@@ -280,5 +278,4 @@ Node {
         }
     }
 
-    // Animations:
 }

@@ -10,7 +10,6 @@ Node {
     property int rotorDirection: 0
     property real rotorAngle: 0
 
-    // Resources
     PrincipledMaterial {
         id: three_fan_dark_material
         objectName: "three_fan_dark"
@@ -48,7 +47,6 @@ Node {
         alphaMode: PrincipledMaterial.Opaque
     }
 
-    // Nodes:
     Node {
         id: root
         objectName: "ROOT"
@@ -120,5 +118,4 @@ Node {
         }
     }
 
-    // Animations:
 }

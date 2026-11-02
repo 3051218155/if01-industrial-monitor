@@ -46,7 +46,6 @@ QString AiClient::parseResponseBody(const QByteArray &body) const
 
     const QJsonObject root = doc.object();
 
-    // OpenAI 兼容格式
     const QJsonArray choices = root.value(QStringLiteral("choices")).toArray();
     if (!choices.isEmpty()) {
         const QJsonObject msg = choices.at(0).toObject().value(QStringLiteral("message")).toObject();
@@ -55,7 +54,6 @@ QString AiClient::parseResponseBody(const QByteArray &body) const
             return content;
     }
 
-    // 通用字段
     for (const char *key : {"reply", "answer", "content", "message", "result"}) {
         const QString v = root.value(QString::fromLatin1(key)).toString().trimmed();
         if (!v.isEmpty())
@@ -85,7 +83,6 @@ void AiClient::requestDiagnosis(const DeviceContext &ctx)
     messages.append(userMsg);
     payload.insert(QStringLiteral("messages"), messages);
 
-    // 同时附带结构化字段，便于非 Chat 格式 API
     QJsonObject data;
     data.insert(QStringLiteral("device_id"), ctx.deviceId);
     data.insert(QStringLiteral("vibration_rms"), ctx.vibrationRms);

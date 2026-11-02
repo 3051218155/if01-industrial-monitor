@@ -68,7 +68,6 @@ void WaveformWidget::paintEvent(QPaintEvent *event)
     p.setPen(QPen(QColor(0x24, 0x30, 0x47), 1));
     p.drawRoundedRect(r, 8, 8);
 
-    // 网格
     p.setPen(QPen(QColor(0x1e, 0x29, 0x3b), 1));
     for (int x = r.left() + 20; x < r.right(); x += 24) {
         p.drawLine(x, r.top() + 22, x, r.bottom() - 8);
@@ -96,11 +95,9 @@ void WaveformWidget::paintEvent(QPaintEvent *event)
     // 下限防止把噪声放大成"大波浪"
     const double scale = std::max({maxAbs * 1.25, 1e-6});
 
-    // 零线
     p.setPen(QPen(QColor(0x33, 0x41, 0x55), 1, Qt::DotLine));
     p.drawLine(r.left() + 6, int(midY), r.right() - 6, int(midY));
 
-    // 波形折线
     QPainterPath path;
     for (int i = 0; i < samples_.size(); ++i) {
         const double x = r.left() + 6 + (plotW * i) / qMax(1, samples_.size() - 1);
@@ -114,7 +111,6 @@ void WaveformWidget::paintEvent(QPaintEvent *event)
     p.setPen(QPen(lineColor_, 2));
     p.drawPath(path);
 
-    // 量程标注（右上角）
     if (!unit_.isEmpty()) {
         QFont vf = font();
         vf.setPointSize(8);
@@ -124,12 +120,10 @@ void WaveformWidget::paintEvent(QPaintEvent *event)
                    QStringLiteral("±%1 %2").arg(scale, 0, 'f', scale < 1 ? 3 : 2).arg(unit_));
     }
 
-    // 扫描线（心电图感）
     p.setPen(QPen(QColor(lineColor_.red(), lineColor_.green(), lineColor_.blue(), 90), 1, Qt::DashLine));
     const int sweepX = r.right() - 8;
     p.drawLine(sweepX, plotTop, sweepX, plotBottom);
 
-    // 最新点高亮
     if (!samples_.isEmpty()) {
         const double lastY = midY - (samples_.last() / scale) * plotH * 0.42;
         p.setPen(Qt::NoPen);

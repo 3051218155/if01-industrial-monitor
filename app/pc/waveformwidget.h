@@ -4,7 +4,7 @@
 #include <QVector>
 #include <QWidget>
 
-// 滚动波形（心电图式），用于振动/电流/温度实时曲线
+// 用于振动、电流和温度的滚动波形
 class WaveformWidget : public QWidget
 {
     Q_OBJECT

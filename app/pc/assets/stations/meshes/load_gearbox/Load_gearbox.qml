@@ -8,7 +8,6 @@ Node {
     property int rotorPwm: 0
     property int rotorDirection: 0
 
-    // Resources
     PrincipledMaterial {
         id: steel_material
         objectName: "steel"
@@ -46,7 +45,6 @@ Node {
         alphaMode: PrincipledMaterial.Opaque
     }
 
-    // Nodes:
     Node {
         id: root
         objectName: "ROOT"
@@ -479,5 +477,4 @@ Node {
         }
     }
 
-    // Animations:
 }

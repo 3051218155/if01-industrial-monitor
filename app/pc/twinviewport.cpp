@@ -33,14 +33,12 @@ void TwinViewportWidget::paintEvent(QPaintEvent *event)
 
     const QRect r = rect();
 
-    // 背景渐变
     QLinearGradient bg(0, 0, r.width(), r.height());
     bg.setColorAt(0.0, QColor(0x0a, 0x0e, 0x17));
     bg.setColorAt(0.55, QColor(0x0f, 0x16, 0x28));
     bg.setColorAt(1.0, QColor(0x08, 0x0c, 0x14));
     p.fillRect(r, bg);
 
-    // 网格地面（2D 透视示意，3D 模型导入前保持「孪生感」）
     p.setPen(QPen(QColor(0x2a, 0x35, 0x50, 180), 1));
     const int horizonY = r.height() * 58 / 100;
     const QPoint center(r.width() / 2, horizonY);
@@ -54,30 +52,27 @@ void TwinViewportWidget::paintEvent(QPaintEvent *event)
         p.drawLine(center.x() - spread, y, center.x() + spread, y);
     }
 
-    // 中心圆环与模型挂载区域
     p.setPen(QPen(QColor(0x50, 0x8c, 0xff, 160), 2));
     p.setBrush(QColor(0x12, 0x18, 0x26, 200));
     p.drawEllipse(center, 88, 88);
     p.setPen(QPen(QColor(0x7e, 0xb8, 0xff, 100), 1, Qt::DashLine));
     p.drawEllipse(center, 120, 120);
 
-    // 主提示文字
     p.setPen(QColor(0xe8, 0xee, 0xf7));
     QFont titleFont = font();
     titleFont.setPointSize(18);
     titleFont.setBold(true);
     p.setFont(titleFont);
     p.drawText(r.adjusted(0, center.y() - 16, 0, 0), Qt::AlignHCenter | Qt::AlignTop,
-               QStringLiteral("3D 数字孪生视口"));
+               QStringLiteral("设备状态视图"));
 
     QFont subFont = font();
     subFont.setPointSize(11);
     p.setFont(subFont);
     p.setPen(QColor(0x88, 0x99, 0xaa));
     p.drawText(r.adjusted(0, center.y() + 12, 0, 0), Qt::AlignHCenter | Qt::AlignTop,
-               QStringLiteral("OpenGL / 外部模型 · 稍后导入"));
+               QStringLiteral("运行状态与故障部位示意"));
 
-    // 故障高亮提示（与左侧数据联动）
     QString siteText;
     if (faultSite_ == QLatin1String("bearing"))
         siteText = QStringLiteral("高亮部位：轴承端");
@@ -114,7 +109,6 @@ void TwinViewportWidget::paintEvent(QPaintEvent *event)
     p.setPen(badgeFg);
     p.drawText(badgeRect, Qt::AlignCenter, badge);
 
-    // 图例
     p.setPen(QColor(0x66, 0x77, 0x88));
     p.setFont(subFont);
     const int legendY = r.height() - 28;

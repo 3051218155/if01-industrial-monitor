@@ -844,9 +844,8 @@ static void can_inject_worker()
             } else if (payload == Payload::Point5) {
                 registers[20] = read_be16(&frame.data[0]);
                 override_mask.fetch_or(static_cast<uint32_t>(1u << 20));
-                // The simulator sends Point5 last for a complete state update.
-                // Re-run that device immediately instead of waiting for the
-                // ten-second full sweep.
+// Point5 marks a complete state update. Re-run that device immediately
+// instead of waiting for the ten-second full sweep.
                 g_model_refresh_mask.fetch_or(
                     static_cast<uint32_t>(1u << (device_id - 1)));
             }

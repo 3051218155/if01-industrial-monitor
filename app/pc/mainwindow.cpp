@@ -741,8 +741,6 @@ MainWindow::MainWindow(QWidget *parent)
         statusBar()->showMessage(
             QStringLiteral("警告：8760 端口启动失败（是否被占用？）"), 10000);
     }
-
-    // 所有设备指标均由 USB-RS485 上的 Modbus RTU 从站提供。
 }
 
 MainWindow::~MainWindow()
@@ -2046,8 +2044,8 @@ QVector<quint16> MainWindow::mergedSerialRegisters(
     if (!fallbackFresh)
         return merged;
 
-    // Bits 13:11 carry the selected 3D fault site. Preserve the fallback
-    // selection while real values still come from the primary serial link.
+    // Bits 13:11 store the selected fault site. Keep the fallback selection
+    // while the primary serial link is active.
     constexpr quint16 siteMask = 0x3800;
     const quint16 fallbackSiteBits = fallback[9] & siteMask;
     if (fallbackSiteBits != 0)
@@ -2058,8 +2056,8 @@ QVector<quint16> MainWindow::mergedSerialRegisters(
         (primary[9] & sourceReal) != 0
         && (primary[9] & mpuError) == 0
         && primary[14] == 0x74;
-    // IDs 2..6 are valid board-side simulated devices; only use COM21 to
-    // fill explicit gaps. ID1 may fall back when its physical MPU is invalid.
+    // IDs 2..6 use board-side channels. COM21 only fills unset fields.
+    // ID1 can use COM21 when its local MPU is invalid.
     const bool fillPhysicalSensorGaps = slave == 1 && !primarySensorUsable;
     int filled = 0;
     const QVector<int> measuredRegisters = {
@@ -2711,7 +2709,6 @@ void MainWindow::refreshPanel()
     } else {
         plStatusLabel_->setText(QStringLiteral("振动 RMS · 采集中"));
     }
-    // NPU 状态来自板端 Modbus 标志位。
     if (!motor.hasData)
         npuStatusLabel_->setText(QStringLiteral("—"));
     else if (motor.npuDeployed)
@@ -2790,12 +2787,10 @@ void MainWindow::applyViewportTwinVisual()
 
 void MainWindow::pushWaveformSamples()
 {
-    // 波形由串口轮询到的 RAW/FILTERED 寄存器驱动。
 }
 
 void MainWindow::updateHudMetrics()
 {
-    // 指标不再本地编造：全部来自 Modbus FC03 的真实返回。
 }
 
 void MainWindow::onWaveTimerTick()
@@ -3065,7 +3060,6 @@ void MainWindow::showTestReport()
     qInfo("Test report window closed");
 }
 
-// 把串口从站返回的板端结果拼成一段人读的文字
 QString MainWindow::boardAnalysisText() const
 {
     const MotorSnapshot &motor = selectedMotor();

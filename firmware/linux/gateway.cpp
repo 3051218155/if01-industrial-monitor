@@ -578,7 +578,7 @@ std::string snapJson(int device_id) {
         localMpu && knownMpuId(static_cast<uint8_t>(who)) && !mpuError;
     g_localSensorValid = localMpu ? localMpuOk : true;
     if (localMpu) {
-        // 用真实 RMS 判级，不再引用 PL 已锁定的 alert_level，避免自锁
+    // 用本地 RMS 判级，不再引用 PL 已锁定的 alert_level，避免自锁
         const int localLevel = (rms >= kEnvAlertHigh) ? 2 : (rms >= kEnvAlertLow) ? 1 : 0;
         if (localLevel > level)
             level = localLevel;
@@ -815,7 +815,7 @@ std::string handle(const std::string &body) {
                path + "\"}}";
     }
     if (cmd == "waveform") {
-        // 现场抓一段真实原始采样：MPU 采样周期 2ms(500Hz)，按同样节奏读 SENSOR_RAW
+// 按 MPU 的 2ms 采样周期读取 SENSOR_RAW。
         int device_id = jsonInt(body, "device_id", 1);
         device_id = std::max(1, std::min(device_id, kDeviceCount));
         int n = jsonInt(body, "n", 128);

@@ -5,7 +5,6 @@ Node {
     readonly property var assemblyBounds: ({minimum: Qt.vector3d(-0.07000000029802322, -0.04749999940395355, -0.07000000029802322), maximum: Qt.vector3d(0.07000000029802322, 0.4025000035762787, 0.07000000029802322)})
     id: node
 
-    // Resources
     PrincipledMaterial {
         id: it_dark_material
         objectName: "it_dark"
@@ -43,7 +42,6 @@ Node {
         alphaMode: PrincipledMaterial.Opaque
     }
 
-    // Nodes:
     Node {
         id: root
         objectName: "ROOT"
@@ -94,5 +92,4 @@ Node {
         }
     }
 
-    // Animations:
 }

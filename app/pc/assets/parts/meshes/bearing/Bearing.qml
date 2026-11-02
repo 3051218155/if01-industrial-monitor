@@ -4,7 +4,6 @@ import QtQuick3D
 Node {
     id: node
 
-    // Resources
     PrincipledMaterial {
         id: principledMaterial
         metalness: 1
@@ -12,7 +11,6 @@ Node {
         alphaMode: PrincipledMaterial.Opaque
     }
 
-    // Nodes:
     Model {
         id: bearing
         objectName: "bearing"
@@ -21,6 +19,4 @@ Node {
             principledMaterial
         ]
     }
-
-    // Animations:
 }
