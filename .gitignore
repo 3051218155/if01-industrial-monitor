@@ -1,0 +1,39 @@
+# Build output
+build/
+build*/
+out/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# Linux executables
+/firmware/linux/pl_regs
+/firmware/linux/motor_ctrl
+/firmware/linux/modbus_master
+/firmware/linux/modbus_slave
+/firmware/linux/sensor_monitor
+/firmware/linux/fault_ai
+/firmware/linux/gateway
+/firmware/linux/perf_bench
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+ai/model/tmp/
+
+# Local configuration and runtime data
+.env
+config.local.yaml
+*.log
+*.csv
+*.jsonl
+capture-preview*.png
+
+# IDE and OS files
+.idea/
+.qtcreator/
+.vscode/
+.DS_Store
+Thumbs.db

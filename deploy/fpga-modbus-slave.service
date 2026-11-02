@@ -1,0 +1,19 @@
+[Unit]
+Description=IF-01 Modbus RTU slave with local CSV storage
+Wants=fpga-can0.service
+After=network.target pl-gp0-access.service fpga-can0.service
+
+[Service]
+Type=simple
+Environment=PL_REG_BASE=0x80000000
+WorkingDirectory=/root
+ExecStart=/root/modbus_slave --slave 1 --csv /root/serial_hmi_log.csv
+Restart=always
+RestartSec=2
+TimeoutStopSec=5
+KillSignal=SIGTERM
+StandardOutput=append:/root/modbus_slave.log
+StandardError=append:/root/modbus_slave.log
+
+[Install]
+WantedBy=multi-user.target

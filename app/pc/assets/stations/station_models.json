@@ -1,0 +1,55 @@
+{
+  "license": "Original procedural assets generated for this project",
+  "unit": "meter",
+  "axis": {
+    "forward": "+X",
+    "up": "+Z"
+  },
+  "models": [
+    {
+      "file": "glb/load_pump.glb",
+      "device_type": "pump_motor",
+      "parts": ["pump_body", "pump_impeller", "pump_shaft", "pump_bearing", "pump_base"]
+    },
+    {
+      "file": "glb/load_fan.glb",
+      "device_type": "fan_motor",
+      "parts": ["fan_housing", "fan_impeller", "fan_shaft", "fan_bearing", "fan_base"]
+    },
+    {
+      "file": "glb/load_fan_three.glb",
+      "device_type": "three_blade_fan_motor",
+      "parts": ["fan_three_rotor", "fan_three_shaft", "fan_three_bearing", "fan_three_base"]
+    },
+    {
+      "file": "glb/load_gearbox.glb",
+      "device_type": "gearbox_motor",
+      "parts": ["gearbox_housing", "gearbox_gear", "gearbox_shaft", "gearbox_bearing", "gearbox_base"]
+    },
+    {
+      "file": "glb/load_belt.glb",
+      "device_type": "belt_motor",
+      "parts": ["belt_pulleys", "belt", "belt_bearing", "belt_base"]
+    },
+    {
+      "file": "glb/station_base.glb",
+      "device_type": "station_common",
+      "parts": ["station_base", "station_rails"]
+    },
+    {
+      "file": "glb/coupling_guard.glb",
+      "device_type": "station_common",
+      "parts": ["coupling_guard_top", "coupling_guard_left", "coupling_guard_right", "coupling_guard_mount"]
+    },
+    {
+      "file": "glb/alarm_light.glb",
+      "device_type": "station_common",
+      "parts": ["alarm_base", "alarm_pole", "alarm_green", "alarm_yellow", "alarm_red"]
+    },
+    {
+      "file": "glb/control_cabinet.glb",
+      "device_type": "station_common",
+      "parts": ["cabinet_body", "cabinet_door", "cabinet_screen", "cabinet_lamp_0", "cabinet_lamp_1", "cabinet_lamp_2"]
+    }
+  ]
+}

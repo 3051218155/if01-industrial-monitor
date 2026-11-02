@@ -1,0 +1,88 @@
+# 机器人终端配置（香橙派 Zero3）
+# API Key / AppID 留空，IP 为示例网段，运行前按现场填写
+
+gateway:
+  host: "192.168.1.100"   # 板端网关 IP
+  port: 9000
+  timeout_sec: 3
+
+# PC 大屏：统一 HTTP 接口 :8760（/api/state、/api/command、/api/report）
+pc_display:
+  enabled: true                   # PC 未开机时查询仍可用，只是不会切 3D
+  host: "192.168.1.100"           # 跑 Qt 大屏 + 统一接口的电脑
+  port: 8760
+  path: "/api/show"               # PC 端已禁用，仅留兼容
+  timeout_sec: 2                  # PC 不在线时快速回退网关
+  mcp_dir: "/home/orangepi/orange_pi_mcp"   # 板子上工具包路径
+
+llm:
+  enabled: true
+  provider: "openai_compatible"   # DeepSeek 官方，OpenAI 兼容
+  api_key: ""                     # TODO: 填自己的 Key
+  base_url: "https://api.deepseek.com/v1"
+  model: "deepseek-chat"
+  timeout_sec: 40
+  retries: 2
+
+baidu:
+  app_id: 0                       # 控制台 AppID（整数）；实时流式 ASR 必填
+  api_key: ""                     # TODO: 百度语音 API Key
+  secret_key: ""                  # TODO: 百度语音 Secret Key
+
+asr:
+  provider: "baidu"
+  sample_rate: 16000
+  # stream=实时 WebSocket；vad/fixed=短语音回退
+  record_mode: "stream"
+  stream_frame_ms: 160
+  stream_dev_pid: 15372             # 实时识别加强标点模型
+  stream_energy_threshold: 500      # PCM 能量门限，低于视为静音
+  record_seconds: 8                 # 仅 fixed / 无 sox 时回退用
+  max_record_seconds: 15            # 单句最长
+  vad_start_sec: 0.2
+  vad_stop_silence_sec: 0.9         # 说完停顿多久结束
+  vad_threshold: "2%"
+  vad_wait_speech_sec: 20           # 等多久开口
+  # 唤醒：同样连续 VAD
+  wake_max_record_seconds: 6
+  wake_wait_speech_sec: 25
+  wake_vad_stop_sec: 0.7
+  wake_vad_start_sec: 0.15
+  wake_pre_delay_sec: 0.05
+  cmd_pre_delay_sec: 0.1
+  cmd_wait_speech_sec: 7
+  cmd_stop_silence_sec: 0.8
+  cmd_listen_retries: 2
+  push_to_talk: false
+  silent_ignore: true
+  require_wake: true
+  wake_words: ["小橙", "小橙小橙", "你好小橙", "小陈", "小成", "小程"]
+  pre_record_delay_sec: 0.15
+  post_tts_delay_sec: 0.6
+  device: "plughw:3,0"              # arecord -l 查到的麦克风设备
+  input_gain_db: 8
+
+tts:
+  provider: "baidu"
+  per: 0
+  device: "plughw:4,0"              # aplay -l 查到的扬声器设备
+  prompt_enabled: true
+  boot_prompt: "机器人已启动，请说小橙唤醒我"
+  ack_prompt: "在"
+  listen_cmd_prompt: "请说"
+  processing_prompt: "正在解析处理"
+  prompt_gap_sec: 0.45
+
+display:
+  width: 1280
+  height: 800
+  fullscreen: false               # 板子接拓展屏后可改 true
+  assets_dir: "assets/devices"
+
+servo:
+  enabled: false                  # 接线完成后再改 true
+  eye_open_angle: 90
+  eye_close_angle: 0
+  # Zero3 具体 PWM 脚位接线后对照手册填写
+  eye_left_pin: 0
+  eye_right_pin: 1

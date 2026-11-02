@@ -1,0 +1,19 @@
+[Unit]
+Description=IF-01 Edge Gateway (TCP JSON :9000)
+After=network.target
+
+[Service]
+Type=simple
+Environment=PL_REG_BASE=0x80000000
+Environment=FPGA_GATEWAY_DIRECT_MULTINODE=1
+WorkingDirectory=/root
+ExecStart=/root/gateway 9000
+Restart=always
+RestartSec=2
+TimeoutStopSec=5
+KillSignal=SIGTERM
+StandardOutput=append:/root/gateway.log
+StandardError=append:/root/gateway.log
+
+[Install]
+WantedBy=multi-user.target

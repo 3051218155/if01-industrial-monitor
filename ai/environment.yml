@@ -1,0 +1,13 @@
+name: fpag-ai
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - scikit-learn
+  - onnx
+  - skl2onnx
+  - onnxruntime=1.31.0=py311h589e48a_1_cpu
+  - libblas=*=*openblas
+  - liblapack=*=*openblas

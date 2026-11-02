@@ -1,0 +1,14 @@
+# 香橙派工具包：查网关 + 控 PC 大屏
+# IP 为示例网段；正常由 robot/main.py 通过 FPAG_CONFIG 注入 robot/config.yaml，
+# 只有单独运行本目录脚本时才读这份配置。
+
+gateway:
+  host: "192.168.1.100"   # 板端网关 IP
+  port: 9000
+  timeout_sec: 5
+
+pc_display:
+  host: "192.168.1.100"   # 跑 Qt 大屏 + 统一接口 :8760 的电脑
+  port: 8760
+  path: "/api/show"
+  timeout_sec: 5

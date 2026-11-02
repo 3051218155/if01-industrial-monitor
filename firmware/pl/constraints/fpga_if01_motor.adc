@@ -1,0 +1,20 @@
+# IF-01 电机脚 → FEP_48IO（与 docs/IF-01_v0.1_寄存器表.md 一致）
+# 电压以 FEP Bank 为准；若综合报错请改 IOSTANDARD（常见 LVCMOS33 / LVCMOS18）
+
+set_pin_assignment	{ motor1_pwm }	{ LOCATION = Y12; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+set_pin_assignment	{ motor1_dir }	{ LOCATION = T9;  IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+set_pin_assignment	{ motor2_pwm }	{ LOCATION = U7;  IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+set_pin_assignment	{ motor2_dir }	{ LOCATION = V6;  IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+
+# 板载 RS485（A0/B0 端子，21_rs485 / IF-01 v0.2）
+set_pin_assignment	{ rs485_tx }	{ LOCATION = L17; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+set_pin_assignment	{ rs485_rx }	{ LOCATION = N16; IOSTANDARD = LVCMOS33; PULLTYPE = NONE; }
+set_pin_assignment	{ rs485_de }	{ LOCATION = N15; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+
+# J12 2.54mm header: MPU-6050 I2C and alert outputs (IF-01 v0.3 algorithm path)
+set_pin_assignment	{ sensor_i2c_scl }	{ LOCATION = T5;  IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = PULLUP; }
+set_pin_assignment	{ sensor_i2c_sda }	{ LOCATION = U5;  IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = PULLUP; }
+set_pin_assignment	{ alert_buzzer }	{ LOCATION = U9;  IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+set_pin_assignment	{ alert_led_green }	{ LOCATION = V11; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+set_pin_assignment	{ alert_led_yellow }	{ LOCATION = Y7;  IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+set_pin_assignment	{ alert_led_red }	{ LOCATION = Y9;  IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }

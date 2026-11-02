@@ -1,0 +1,11 @@
+[Unit]
+Description=Open DR1M90 GP0 access for IF-01 PL
+After=sysinit.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/devmem2 0xF8800080 w 0x1
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,15 @@
+[Unit]
+Description=Load IF-01 HARDNPU kernel modules
+After=systemd-modules-load.service
+Before=fpga-modbus-slave.service if01-gateway.service
+ConditionPathExists=/root/ai/condition/cma_mem.ko
+ConditionPathExists=/root/ai/condition/hard_npu.ko
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/sh -c 'grep -q "^cma_mem " /proc/modules || /sbin/insmod /root/ai/condition/cma_mem.ko'
+ExecStart=/bin/sh -c 'grep -q "^hard_npu " /proc/modules || /sbin/insmod /root/ai/condition/hard_npu.ko'
+
+[Install]
+WantedBy=multi-user.target
